@@ -1,58 +1,66 @@
-lista_usuario = []
+usuarios = {}  # Diccionario para almacenar los usuarios
 
-def ingresar_usuario(usuario,nombre,sexo,contraseña):
-    lista_usuario.append(usuario)
-    usuarios= {
-        "nombre": {
-        "sexo": "M" or "F",
-        "contraseña": "contraseña_del_usuario"
-        }
-    }
-    nombre = input("Ingrese nombre de usuario:")
-    sexo = input("Ingrese sexo:")
-    contraseña = input("Ingrese contraseña:")
-
-def validar_sexo():
-    print("")
-
-def validar_contraseña():
-    print("")
-
-def buscar_usuario(buscar):
-    for i in lista_usuario(buscar): 
-       return
-       
-def eliminar_usuario(eliminar):
-    lista_usuario in eliminar
-    lista_usuario.remove(eliminar)
-    return
-
-def mostrar_menu(opcion,usuario):
-    print("1.Ingresar usuario")
-    print("2.Buscar usuario")
-    print("3.Elimnar usuario")
-    print("4.Salir")
-
-    while True:
-        opcion = input("Ingrese una opcion:")
+def ingresar_usuario():
+    nombre = input("Ingrese nombre de usuario: ")
     
-        try:
-            if opcion == "1":
-                ingresar_usuario(usuario)
+    if nombre in usuarios:
+        print("El usuario ya existe.")
+        return
 
-            elif opcion == "2":
-                buscar_usuario(usuario)
+    sexo = input("Ingrese sexo (M/F): ").upper()
+    if sexo not in ["M", "F"]:
+        print("Sexo inválido. Debe ser 'M' o 'F'.")
+        return
 
-            elif opcion == "3":
-                eliminar_usuario(usuario)
+    contraseña = input("Ingrese contraseña: ")
 
-            elif opcion == "4":
-                print("Saliste del programa")
-                break
-            else:
-                print("Debe ingresar una opción válida!")
-        except ValueError:
-            print("Caracteres Invalidos.")
+    # Agregar usuario al diccionario
+    usuarios[nombre] = {
+        "sexo": sexo,
+        "contraseña": contraseña
+    }
+    print(f"Usuario '{nombre}' ingresado correctamente.")
+
+def buscar_usuario():
+    nombre = input("Ingrese el nombre del usuario a buscar: ")
+    if nombre in usuarios:
+        datos = usuarios[nombre]
+        print(f"Usuario encontrado: {nombre} - Sexo: {datos['sexo']}")
+    else:
+        print("Usuario no encontrado.")
+
+def eliminar_usuario():
+    nombre = input("Ingrese el nombre del usuario a eliminar: ")
+    if nombre in usuarios:
+        del usuarios[nombre]
+        print(f"Usuario '{nombre}' eliminado correctamente.")
+    else:
+        print("Usuario no encontrado.")
+
+def mostrar_menu():
+    while True:
+        print("\n--- Menú ---")
+        print("1. Ingresar usuario")
+        print("2. Buscar usuario")
+        print("3. Eliminar usuario")
+        print("4. Salir")
+
+        opcion = input("Ingrese una opción: ")
+
+        if opcion == "1":
+            ingresar_usuario()
+        elif opcion == "2":
+            buscar_usuario()
+        elif opcion == "3":
+            eliminar_usuario()
+        elif opcion == "4":
+            print("Saliste del programa.")
+            break
+        else:
+            print("Debe ingresar una opción válida (1-4).")
+
+# Iniciar el programa
+mostrar_menu()
 
 
 
